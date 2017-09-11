@@ -34,6 +34,16 @@ public class ActivityOne extends Activity {
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.activity_one);
 
+			if((savedInstanceState != null)){
+				onCreateCounter = savedInstanceState.getInt("onCreateCounter") ;
+				onStartCounter = savedInstanceState.getInt("onStartCounter") ;
+				onResumeCounter = savedInstanceState.getInt("onResumeCounter")  ;
+				onPauseCounter = savedInstanceState.getInt("onPauseCounter")  ;
+				onStopCounter = savedInstanceState.getInt("onStopCounter")  ;
+				onDestroyCounter = savedInstanceState.getInt("onDestroyCounter")  ;
+				onRestartCounter = savedInstanceState.getInt("onRestartCounter")  ;
+			}
+
 			onCreateCounter++;
 			//Log cat print out
 			Log.i(TAG, "onCreate called ");
@@ -46,7 +56,7 @@ public class ActivityOne extends Activity {
 			tvStop = (TextView)findViewById(R.id.stop);
 			tvRestart = (TextView)findViewById(R.id.restart);
 
-			tvCreate.setText(Integer.toString(onCreateCounter));
+			tvCreate.setText("onCreate calls: " + Integer.toString(onCreateCounter));
 			//TODO: update the appropriate count variable & update the view
 		}
 
@@ -117,11 +127,16 @@ public class ActivityOne extends Activity {
 		}
 
 
-	// TODO: implement 5 missing lifecycle callback methods
-
 		@Override
 		public void onSaveInstanceState(Bundle savedInstanceState){
-			//TODO:  save state information with a collection of key-value pairs & save all  count variables
+			super.onSaveInstanceState(savedInstanceState);
+			savedInstanceState.putInt("onCreateCounter", onCreateCounter);
+			savedInstanceState.putInt("onStartCounter", onStartCounter);
+			savedInstanceState.putInt("onResumeCounter", onResumeCounter);
+			savedInstanceState.putInt("onPauseCounter", onPauseCounter);
+			savedInstanceState.putInt("onStopCounter", onStopCounter);
+			savedInstanceState.putInt("onDestroyCounter", onDestroyCounter);
+			savedInstanceState.putInt("onRestartCounter", onRestartCounter);
 		}
 
 
